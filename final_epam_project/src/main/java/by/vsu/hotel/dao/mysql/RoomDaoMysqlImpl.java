@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class RoomDaoMysqlImpl extends BaseDaoMysqlImpl<Room> implements RoomDao {
     @Override
@@ -24,19 +23,6 @@ public class RoomDaoMysqlImpl extends BaseDaoMysqlImpl<Room> implements RoomDao 
         select(
                 "SELECT `id`, `number`, `number_of_seats`, `apartment_type`, `price` FROM `room`",
                 null,
-                rooms::add
-        );
-        return rooms;
-    }
-
-    public List<Room> readByNumberOfSeats(Integer numberOfSeats, Long price) throws DaoException {
-        List<Room> rooms = new ArrayList<>();
-        select(
-                "SELECT `id`, `number`, `number_of_seats`, `apartment_type`, `price` FROM `room` WHERE `number_of_seats` >= ? AND `price` <= ?",
-                preparedStatement -> {
-                    preparedStatement.setInt(1, numberOfSeats);
-                    preparedStatement.setLong(2, price);
-                },
                 rooms::add
         );
         return rooms;

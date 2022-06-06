@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0"
+  metadata-complete="true">
+
+    <display-name>EPAM final project "Hotel"</display-name>
+    <request-character-encoding>UTF-8</request-character-encoding>
+
+    <context-param>
+        <param-name>jdbc-driver</param-name>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jdbc-url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/epam_db?useUnicode=true&amp;characterEncoding=UTF-8</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jdbc-user</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jdbc-password</param-name>
+        <param-value>root</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>by.vsu.hotel.web.ApplicationInitializer</listener-class>
+    </listener>
+
+    <servlet>
+      <servlet-name>RoomListController</servlet-name>
+      <servlet-class>by.vsu.hotel.web.controller.room.RoomListController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoomListController</servlet-name>
+        <url-pattern>/room/list.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>RoomEditController</servlet-name>
+      <servlet-class>by.vsu.hotel.web.controller.room.RoomEditController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoomEditController</servlet-name>
+        <url-pattern>/room/edit.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>RoomSaveController</servlet-name>
+      <servlet-class>by.vsu.hotel.web.controller.room.RoomSaveController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoomSaveController</servlet-name>
+        <url-pattern>/room/save.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>RoomDeleteController</servlet-name>
+      <servlet-class>by.vsu.hotel.web.controller.room.RoomDeleteController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RoomDeleteController</servlet-name>
+        <url-pattern>/room/delete.html</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>
