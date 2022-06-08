@@ -3,14 +3,14 @@ package by.vsu.hotel.web.controller.room;
 import by.vsu.hotel.service.RoomService;
 import by.vsu.hotel.service.ServiceException;
 import by.vsu.hotel.service.factory.ServiceFactory;
-import by.vsu.hotel.web.controller.BaseController;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RoomListController extends BaseController {
+public class RoomListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try(ServiceFactory factory = ServiceFactory.newInstance()) {

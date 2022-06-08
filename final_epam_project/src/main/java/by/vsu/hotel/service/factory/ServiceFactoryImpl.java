@@ -1,11 +1,11 @@
 package by.vsu.hotel.service.factory;
 
 import by.vsu.hotel.dao.RoomDao;
+import by.vsu.hotel.dao.UserDao;
 import by.vsu.hotel.dao.mysql.RoomDaoMysqlImpl;
+import by.vsu.hotel.dao.mysql.UserDaoMysqlImpl;
 import by.vsu.hotel.dao.mysql.connector.Connector;
-import by.vsu.hotel.service.RoomService;
-import by.vsu.hotel.service.RoomServiceImpl;
-import by.vsu.hotel.service.ServiceException;
+import by.vsu.hotel.service.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,6 +27,21 @@ public class ServiceFactoryImpl implements ServiceFactory {
         return roomService;
     }
 
+    private UserService userService;
+    @Override
+    public UserService newUserServiceInstance() throws ServiceException {
+        if(userService == null) {
+            try {
+                UserServiceImpl userServiceImpl = new UserServiceImpl();
+                userServiceImpl.setUserDao(newUserDaoInstance());
+                userService = userServiceImpl;
+            } catch (SQLException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return userService;
+    }
+
     private RoomDao roomDao;
     private RoomDao newRoomDaoInstance() throws SQLException {
         if(roomDao == null) {
@@ -35,6 +50,16 @@ public class ServiceFactoryImpl implements ServiceFactory {
             roomDao = roomDaoMysqlImpl;
         }
         return roomDao;
+    }
+
+    private UserDao userDao;
+    private UserDao newUserDaoInstance() throws SQLException {
+        if(userDao == null) {
+            UserDaoMysqlImpl userDaoMysqlImpl = new UserDaoMysqlImpl();
+            userDaoMysqlImpl.setConnection(newConnectionInstance());
+            userDao = userDaoMysqlImpl;
+        }
+        return userDao;
     }
 
     private Connection connection;

@@ -5,16 +5,17 @@ import by.vsu.hotel.domain.Room;
 import by.vsu.hotel.service.RoomService;
 import by.vsu.hotel.service.ServiceException;
 import by.vsu.hotel.service.factory.ServiceFactory;
-import by.vsu.hotel.web.controller.BaseController;
+import by.vsu.hotel.web.controller.WebUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RoomSaveController extends BaseController {
+public class RoomSaveController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
@@ -29,7 +30,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         try {
@@ -39,7 +40,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(room.getNumber() <= 0) {
@@ -47,7 +48,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(type == null) {
@@ -55,7 +56,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         try {
@@ -69,7 +70,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         try {
@@ -79,7 +80,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(room.getNumberOfSeats() <= 0) {
@@ -87,7 +88,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         long priceRub;
@@ -96,7 +97,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         try {
@@ -106,7 +107,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(priceRub < 0) {
@@ -114,7 +115,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(priceKopStr == null || priceKopStr.isBlank()) {
@@ -122,7 +123,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         long priceKop;
@@ -133,7 +134,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(priceKop < 0) {
@@ -141,7 +142,7 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         if(priceKop >= 100) {
@@ -149,14 +150,14 @@ public class RoomSaveController extends BaseController {
             if(id != null) {
                 params.put("id", id);
             }
-            sendRedirect(req, resp, "/room/edit.html", params);
+            WebUtil.sendRedirect(req, resp, "/room/edit.html", params);
             return;
         }
         room.setPrice(priceRub * 100 + priceKop);
         try(ServiceFactory factory = ServiceFactory.newInstance()) {
             RoomService service = factory.newRoomServiceInstance();
             service.save(room);
-            sendRedirect(req, resp, "/room/list.html", Map.of("message", "Комната сохранена успешно"));
+            WebUtil.sendRedirect(req, resp, "/room/list.html", Map.of("message", "Комната сохранена успешно"));
         } catch (ServiceException e) {
             throw new ServletException(e);
         }

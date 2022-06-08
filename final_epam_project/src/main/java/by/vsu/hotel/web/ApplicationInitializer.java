@@ -16,7 +16,6 @@ public class ApplicationInitializer implements ServletContextListener {
             String jdbcUser = context.getInitParameter("jdbc-user");
             String jdbcPassword = context.getInitParameter("jdbc-password");
             Connector.init(jdbcDriver, jdbcUrl, jdbcUser, jdbcPassword);
-            System.out.println("DEBUG: APPLICATION INIT OK");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

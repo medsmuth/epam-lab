@@ -14,7 +14,6 @@ public final class Connector {
         Connector.jdbcUrl = jdbcUrl;
         Connector.jdbcUser = jdbcUser;
         Connector.jdbcPassword = jdbcPassword;
-        System.out.println("DEBUG: CONNECTOR INIT OK");
     }
 
     public static Connection getConnection() throws SQLException {

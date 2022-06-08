@@ -5,15 +5,15 @@ import by.vsu.hotel.domain.Room;
 import by.vsu.hotel.service.RoomService;
 import by.vsu.hotel.service.ServiceException;
 import by.vsu.hotel.service.factory.ServiceFactory;
-import by.vsu.hotel.web.controller.BaseController;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class RoomEditController extends BaseController {
+public class RoomEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
